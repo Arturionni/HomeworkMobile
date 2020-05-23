@@ -1,6 +1,7 @@
 package com.example.homeworkmobile
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
@@ -84,11 +85,8 @@ class LoginFragment : Fragment() {
                             toast.setGravity(Gravity.TOP, 0, 0)
                             toast.show()
 
-                            val newFragment: Fragment = LoginFragment()
-                            val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
-                            transaction.replace(R.id.container, newFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
+                            val intent = Intent(this.activity, PersonalAreaActivity::class.java)
+                            startActivity(intent)
                         })
                     }).start()
                 }else{
