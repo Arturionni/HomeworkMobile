@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp"
+    tools:context=".personalArea.tabsMainMenu.AccountTabFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/no_photo"
+            app:civ_border_width="0.5dp"
+            app:civ_border_color="#FF000000"/>
+        <LinearLayout
+            android:id="@+id/vUserDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/userName"
+                android:textAlignment="center"
+                android:text="Артур"
+                android:layout_margin="5dp"
+                android:textSize="24sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="kalimgulovartur@gmail.com"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAlignment="center"
+                android:text="Статус: клиент"
+                android:textSize="18sp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/changeUserProfileButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cornerRadius="10dp"
+                android:layout_marginTop="26dp"
+                android:text="Изменить профиль"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cornerRadius="10dp"
+                android:text="Изменить пароль"
+             />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/loginButton"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:text="Удалить аккаунт"
+                app:cornerRadius="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
