@@ -1,4 +1,4 @@
-package com.example.homeworkmobile
+package com.example.homeworkmobile.login
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.android.volley.toolbox.Volley
+import com.example.homeworkmobile.R
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.json.JSONObject
 import java.util.regex.Matcher
@@ -41,7 +42,8 @@ class SignUpFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        mSettings = this.activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        mSettings = this.activity?.getSharedPreferences(
+            APP_PREFERENCES, Context.MODE_PRIVATE);
     }
 
     override fun onCreateView(
@@ -56,7 +58,8 @@ class SignUpFragment : Fragment() {
         val queue = Volley.newRequestQueue(activity?.applicationContext)
 
         signUpBackButton.setOnClickListener {
-            val newFragment: Fragment = LoginFragment()
+            val newFragment: Fragment =
+                LoginFragment()
             val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
             transaction.replace(R.id.container, newFragment);
             transaction.addToBackStack(null);
@@ -104,7 +107,8 @@ class SignUpFragment : Fragment() {
                         editor?.putString(APP_PREFERENCES_EMAIL, email)
                         editor?.putString(APP_PREFERENCES_PASSWORD, password)
                         editor?.apply()
-                        val newFragment: Fragment = LoginFragment()
+                        val newFragment: Fragment =
+                            LoginFragment()
                         val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
                         transaction.replace(R.id.container, newFragment);
                         transaction.addToBackStack(null);

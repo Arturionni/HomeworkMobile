@@ -1,11 +1,10 @@
-package com.example.homeworkmobile
+package com.example.homeworkmobile.login
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.util.Patterns
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -14,12 +13,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.homeworkmobile.personalArea.PersonalAreaActivity
+import com.example.homeworkmobile.R
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.emailEditText
 import kotlinx.android.synthetic.main.fragment_login.emailLayout
 import kotlinx.android.synthetic.main.fragment_login.passwordEditText
 import kotlinx.android.synthetic.main.fragment_login.passwordLayout
-import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 
 private const val ARG_PARAM1 = "param1"
@@ -97,7 +97,8 @@ class LoginFragment : Fragment() {
         }
 
         signUpButton.setOnClickListener {
-            val newFragment: Fragment = SignUpFragment()
+            val newFragment: Fragment =
+                SignUpFragment()
             val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
 
             transaction.replace(R.id.container, newFragment);
