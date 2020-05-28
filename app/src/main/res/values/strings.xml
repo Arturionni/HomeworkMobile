@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ваш персональный банк</string>
+    <string name="app_name">Ваш банк</string>
     <string name="title_activity_personal_area">Личный кабинет</string>
     <string name="supporting_text">Точно хотите создать новый счет?</string>
     <string name="cancel">Отмена</string>

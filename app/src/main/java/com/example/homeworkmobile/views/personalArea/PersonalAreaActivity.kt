@@ -1,19 +1,13 @@
-package com.example.homeworkmobile.personalArea
+package com.example.homeworkmobile.views.personalArea
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.homeworkmobile.personalArea.adapters.AccountsListAdapter
 import com.example.homeworkmobile.R
-import com.example.homeworkmobile.login.LoginFragment
-import com.example.homeworkmobile.personalArea.tabsMainMenu.AccountTabFragment
-import com.example.homeworkmobile.personalArea.tabsMainMenu.MainTabFragment
-import com.example.homeworkmobile.personalArea.tabsMainMenu.TransfersTabFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.homeworkmobile.views.personalArea.tabsMainMenu.AccountTabFragment
+import com.example.homeworkmobile.views.personalArea.tabsMainMenu.MainTabFragment
+import com.example.homeworkmobile.views.personalArea.tabsMainMenu.TransfersTabFragment
 import kotlinx.android.synthetic.main.activity_personal_area.*
 
 

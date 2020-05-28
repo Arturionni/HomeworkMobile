@@ -2,12 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.homeworkmobile">
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
+        android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/fav"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -15,10 +14,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".personalArea.PersonalAreaActivity"
+            android:name=".views.personalArea.PersonalAreaActivity"
             android:label="@string/title_activity_personal_area"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".login.MainActivity">
+        <activity android:name=".views.login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.example.homeworkmobile.personalArea.tabsMainMenu
+package com.example.homeworkmobile.views.personalArea.tabsMainMenu
 
 import android.os.Bundle
 import android.util.Log
@@ -9,18 +9,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeworkmobile.R
-import com.example.homeworkmobile.personalArea.Account
-import com.example.homeworkmobile.personalArea.adapters.AccountsListAdapter
+import com.example.homeworkmobile.views.personalArea.Account
+import com.example.homeworkmobile.views.personalArea.adapters.AccountsListAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_tab_main.*
+import java.util.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 var accounts:MutableList<Account> = mutableListOf(
-    Account("465465", 546456)
 )
-
 class MainTabFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
@@ -51,8 +50,12 @@ class MainTabFragment : Fragment() {
                 .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+                    val accountNumber = (0..1000000000).random() + 4000000000
                     accounts.add(
-                        Account("123", 0)
+                        Account(
+                            accountNumber.toString(),
+                            0
+                        )
                     )
                     viewAdapter.notifyDataSetChanged()
                     Log.d("TAG", accounts.toString())
@@ -61,7 +64,9 @@ class MainTabFragment : Fragment() {
         }
         viewManager = LinearLayoutManager(this.activity)
         viewAdapter =
-            AccountsListAdapter(accounts)
+            AccountsListAdapter(
+                accounts
+            )
 
         recyclerView = this.activity?.findViewById<RecyclerView>(R.id.my_recycler_view)?.apply {
             setHasFixedSize(true)

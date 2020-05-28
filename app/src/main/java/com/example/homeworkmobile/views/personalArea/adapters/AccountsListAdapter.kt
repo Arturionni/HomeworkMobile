@@ -1,10 +1,10 @@
-package com.example.homeworkmobile.personalArea.adapters
+package com.example.homeworkmobile.views.personalArea.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.homeworkmobile.personalArea.Account
+import com.example.homeworkmobile.views.personalArea.Account
 import com.example.homeworkmobile.R
 
 internal class AccountsListAdapter(

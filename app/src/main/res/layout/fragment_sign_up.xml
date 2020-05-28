@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.SignUpFragment">
+    android:background="@drawable/back2"
+    tools:context=".views.login.SignUpFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -102,7 +103,6 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/signUpSendButton"
-            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="161dp" />
+            app:layout_constraintGuide_begin="68dp" />
 
         <ProgressBar
             android:id="@+id/progressBar"

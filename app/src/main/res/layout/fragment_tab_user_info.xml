@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
-    tools:context=".personalArea.tabsMainMenu.AccountTabFragment">
+    tools:context=".views.personalArea.tabsMainMenu.AccountTabFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
