@@ -10,10 +10,13 @@ import javax.inject.Inject
 class UserModel @Inject constructor(
     private val userDao: UserDao)
   {
-    suspend fun getUsersFromDb(): LiveData<List<User>> {
-        return withContext(Dispatchers.IO) { userDao.getAll() }
+    suspend fun getUserFromDb(email: String): LiveData<User?> {
+        return withContext(Dispatchers.IO) { userDao.getUser(email) }
     }
     suspend fun addUserToDB(user: User) {
         withContext(Dispatchers.IO) { userDao.createUser(user) }
+    }
+    suspend fun userExist(email: String): Boolean  {
+        return withContext(Dispatchers.IO) { userDao.userExist(email) }
     }
 }

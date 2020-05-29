@@ -2,6 +2,7 @@ package com.example.homeworkmobile.views.login
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +16,14 @@ import com.example.homeworkmobile.model.data.User
 import com.example.homeworkmobile.utils.emailValidator
 import com.example.homeworkmobile.utils.nameValidator
 import com.example.homeworkmobile.utils.passwordValidator
+import io.reactivex.Single
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class SignUpFragment : Fragment(), CoroutineScope {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,12 +57,23 @@ class SignUpFragment : Fragment(), CoroutineScope {
             if (passwordConfirm != password)
                 Toast.makeText(activity?.applicationContext, "Пароли не совпадают", Toast.LENGTH_SHORT).show()
 
-            if (emailValidator(email) && nameValidator(firstName) && passwordValidator(password) && passwordValidator(passwordConfirm) && passwordConfirm == password){
-                progressBar.visibility = View.VISIBLE
-                createUser(User(null, firstName, password, email))
+            val value: MainActivity = activity as MainActivity
+            launch {
+                val userExist = value.mUserViewModel.userExist(email)
+                if (emailValidator(email) && nameValidator(firstName) && passwordValidator(password) && passwordValidator(passwordConfirm) && passwordConfirm == password && !userExist){
+                    progressBar.visibility = View.VISIBLE
+                    createUser(User(null, firstName, password, email,
+                        isClient = true,
+                        status = true
+                    ))
+                }
+                else {
+                    val toast = Toast.makeText(activity?.applicationContext, "Пользователь с таким email уже существует!", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.TOP, 0, 0)
+                    toast.show()
+                }
             }
         }
-
     }
     private fun validFields(email: String, firstName: String, password: String, passwordConfirm: String) {
         emailLayout.error = null;

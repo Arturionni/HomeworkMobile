@@ -3,9 +3,11 @@ package com.example.homeworkmobile.views.login
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProviders
 import com.example.homeworkmobile.R
+import com.example.homeworkmobile.model.data.User
+import com.example.homeworkmobile.utils.Constants
 import com.example.homeworkmobile.viewmodel.UserViewModel
 import com.example.homeworkmobile.viewmodel.UserViewModelFactory
 import com.example.homeworkmobile.views.BaseActivity

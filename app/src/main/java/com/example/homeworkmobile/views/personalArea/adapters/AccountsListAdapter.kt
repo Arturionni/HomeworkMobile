@@ -1,16 +1,23 @@
 package com.example.homeworkmobile.views.personalArea.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.homeworkmobile.views.personalArea.Account
 import com.example.homeworkmobile.R
+import com.example.homeworkmobile.model.data.Account
 
-internal class AccountsListAdapter(
-    private val list: List<Account>
-) :
-    RecyclerView.Adapter<AccountsListAdapter.AccountViewHolder>() {
+class AccountsListAdapter(
+    listArray: List<Account>?
+) : RecyclerView.Adapter<AccountsListAdapter.AccountViewHolder>() {
+
+    var list = ArrayList<Account>()
+
+    init {
+        this.list = listArray as ArrayList<Account>
+    }
+
     class AccountViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.fragment_account_card, parent, false)) {
         private var number: TextView? = null
@@ -20,8 +27,8 @@ internal class AccountsListAdapter(
             balance = itemView.findViewById(R.id.accountBalanceCard)
         }
         fun bind(account: Account) {
-            number?.text = account.number
-            balance?.text = account.balance.toString()
+            number?.text = account.accountNumber
+            balance?.text = account.accountBalance.toString()
         }
     }
 
@@ -36,6 +43,10 @@ internal class AccountsListAdapter(
         )
     }
 
+    fun updateAccounts(accounts: List<Account>) {
+        list = ArrayList(accounts)
+        notifyDataSetChanged()
+    }
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         val account: Account = list[position]
         holder.bind(account)

@@ -8,11 +8,13 @@ import javax.inject.Inject
 
 class UserViewModel @Inject constructor(private val userModel: UserModel) : ViewModel() {
 
-    suspend fun getUserFromDb(): LiveData<List<User>> {
-        return userModel.getUsersFromDb()
+    suspend fun getUserFromDb(email: String): LiveData<User?> {
+        return userModel.getUserFromDb(email)
     }
-
     suspend fun addUserToDB(user: User) {
         return userModel.addUserToDB(user)
+    }
+    suspend fun userExist(email: String): Boolean {
+        return userModel.userExist(email)
     }
 }

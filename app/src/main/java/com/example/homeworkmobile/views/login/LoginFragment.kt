@@ -1,23 +1,23 @@
 package com.example.homeworkmobile.views.login
 
+import android.app.ActivityOptions
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.example.homeworkmobile.R
-import com.example.homeworkmobile.model.data.User
+import com.example.homeworkmobile.utils.Constants
 import com.example.homeworkmobile.utils.emailValidator
 import com.example.homeworkmobile.utils.passwordValidator
+import com.example.homeworkmobile.views.personalArea.PersonalAreaActivity
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_login.emailEditText
-import kotlinx.android.synthetic.main.fragment_login.emailLayout
-import kotlinx.android.synthetic.main.fragment_login.passwordEditText
-import kotlinx.android.synthetic.main.fragment_login.passwordLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -53,11 +53,32 @@ class LoginFragment : Fragment(), CoroutineScope {
 
             if (!emailValidator(email)) emailLayout.error = "Неверный формат Email"
             if (!passwordValidator(password)) passwordLayout.error = "Минимум 4 символа"
-
+            if (email != "" && password != "" && emailValidator(email) && passwordValidator(password))
             launch{
                 val value: MainActivity = activity as MainActivity
-                value.mUserViewModel.getUserFromDb().observe(value, Observer { mappingList ->
-                    mappingList.forEach{Log.d("TAG" , it.id.toString() + " " + it.firstName)}
+                value.mUserViewModel.getUserFromDb(email).observe(value, Observer { user -> (
+                    if (user != null ){
+                        if (user.password == password){
+                            val intent = Intent(activity, PersonalAreaActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            val b = Bundle()
+                            b.putSerializable("user", user)
+                            intent.putExtras(b)
+                            startActivity(intent)
+                        }
+                        else{
+                            val toast = Toast.makeText(activity?.applicationContext, "Неверный пароль!", Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.TOP, 0, 0)
+                            toast.show()
+                        }
+                    }
+                    else
+                    {
+                        val toast = Toast.makeText(activity?.applicationContext, "Пользователя с таким email не существует!", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.TOP, 0, 0)
+                        toast.show()
+                    }
+                )
                 })
 
             }

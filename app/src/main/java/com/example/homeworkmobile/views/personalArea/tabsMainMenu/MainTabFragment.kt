@@ -6,33 +6,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeworkmobile.R
-import com.example.homeworkmobile.views.personalArea.Account
+import com.example.homeworkmobile.model.data.Account
+import com.example.homeworkmobile.views.personalArea.PersonalAreaActivity
 import com.example.homeworkmobile.views.personalArea.adapters.AccountsListAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_tab_main.*
-import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-var accounts:MutableList<Account> = mutableListOf(
-)
-class MainTabFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+@Suppress("UNCHECKED_CAST")
+class MainTabFragment : Fragment(), CoroutineScope {
+
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private var viewAdapter =  AccountsListAdapter( ArrayList())
     private lateinit var viewManager: RecyclerView.LayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
+    private var job: Job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +47,15 @@ class MainTabFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewManager = LinearLayoutManager(this.activity)
+
+        launch {
+            val value: PersonalAreaActivity = activity as PersonalAreaActivity
+            value.mAccountViewModel.getAccountsFromDb(value.user.id!!).observe(value, Observer {
+                viewAdapter.updateAccounts(it as List<Account>)
+            })
+        }
+
         fab.setOnClickListener {
             MaterialAlertDialogBuilder(this.activity)
                 .setTitle(resources.getString(R.string.title))
@@ -50,23 +63,19 @@ class MainTabFragment : Fragment() {
                 .setNeutralButton(resources.getString(R.string.cancel)) { dialog, which ->
                 }
                 .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
-                    val accountNumber = (0..1000000000).random() + 4000000000
-                    accounts.add(
-                        Account(
-                            accountNumber.toString(),
-                            0
-                        )
-                    )
-                    viewAdapter.notifyDataSetChanged()
-                    Log.d("TAG", accounts.toString())
+                    launch {
+                        val value: PersonalAreaActivity = activity as PersonalAreaActivity
+                        value.mAccountViewModel.getAccountsFromDb(value.user.id!!).observe(value, Observer {
+                            list -> (
+                                list.forEach {Log.d("CoUNT", it?.accountNumber!!) }
+                                )
+                        })
+                        value.user.id?.let { value.mAccountViewModel.addAccountToDB(it) }
+                        viewAdapter.notifyDataSetChanged()
+                    }
                 }
                 .show()
         }
-        viewManager = LinearLayoutManager(this.activity)
-        viewAdapter =
-            AccountsListAdapter(
-                accounts
-            )
 
         recyclerView = this.activity?.findViewById<RecyclerView>(R.id.my_recycler_view)?.apply {
             setHasFixedSize(true)
@@ -79,10 +88,6 @@ class MainTabFragment : Fragment() {
         fun newInstance(param1: String, param2: String) =
             MainTabFragment()
                 .apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
             }
     }
 }

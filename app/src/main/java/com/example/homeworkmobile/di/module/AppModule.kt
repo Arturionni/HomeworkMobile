@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.homeworkmobile.model.db.AccountsDao
 import com.example.homeworkmobile.model.db.AppDatabase
 import com.example.homeworkmobile.model.db.UserDao
 import com.example.homeworkmobile.utils.Constants
@@ -40,4 +41,10 @@ class AppModule(val app: Application) {
     fun provideUserDao(
         database: AppDatabase
     ): UserDao = database.userDao()
+
+    @Provides
+    @Singleton
+    fun provideAccountsDao(
+        database: AppDatabase
+    ): AccountsDao = database.accountsDao()
 }
