@@ -6,19 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.homeworkmobile.R
+import com.example.homeworkmobile.model.data.User
+import kotlinx.android.synthetic.main.fragment_tab_user_info.*
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "user"
 
 class AccountTabFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            user = it.getSerializable(ARG_PARAM1) as User?
         }
     }
 
@@ -29,16 +28,8 @@ class AccountTabFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tab_user_info, container, false)
     }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AccountTabFragment()
-                .apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        userName.text = user?.firstName
+        userEmail.text = user?.email
     }
 }

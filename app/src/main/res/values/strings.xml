@@ -6,7 +6,7 @@
     <string name="title">Новый счет</string>
     <string name="accept">Да, хочу</string>
     <string name="text_label_1">Главная</string>
-    <string name="text_label_2">Платежи</string>
+    <string name="text_label_2">История</string>
     <string name="text_label_3">Аккаунт</string>
 
     <!-- TODO: Remove or change this placeholder text -->

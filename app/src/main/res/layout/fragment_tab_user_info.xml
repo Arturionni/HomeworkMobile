@@ -33,12 +33,17 @@
                 android:text="Артур"
                 android:layout_margin="5dp"
                 android:textSize="24sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:id="@+id/userEmail"
                 android:text="kalimgulovartur@gmail.com"
                 android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,28 +51,7 @@
                 android:textAlignment="center"
                 android:text="Статус: клиент"
                 android:textSize="18sp" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/changeUserProfileButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cornerRadius="10dp"
-                android:layout_marginTop="26dp"
-                android:text="Изменить профиль"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cornerRadius="10dp"
-                android:text="Изменить пароль"
-             />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/loginButton"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:text="Удалить аккаунт"
-                app:cornerRadius="10dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

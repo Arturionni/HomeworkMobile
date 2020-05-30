@@ -54,24 +54,29 @@ class SignUpFragment : Fragment(), CoroutineScope {
 
             validFields(email, firstName, password, passwordConfirm)
 
-            if (passwordConfirm != password)
-                Toast.makeText(activity?.applicationContext, "Пароли не совпадают", Toast.LENGTH_SHORT).show()
-
             val value: MainActivity = activity as MainActivity
             launch {
                 val userExist = value.mUserViewModel.userExist(email)
-                if (emailValidator(email) && nameValidator(firstName) && passwordValidator(password) && passwordValidator(passwordConfirm) && passwordConfirm == password && !userExist){
-                    progressBar.visibility = View.VISIBLE
-                    createUser(User(null, firstName, password, email,
-                        isClient = true,
-                        status = true
-                    ))
+                if (emailValidator(email) && nameValidator(firstName) && passwordValidator(password) && passwordValidator(passwordConfirm) && passwordConfirm == password){
+                    if (!userExist) {
+                        progressBar.visibility = View.VISIBLE
+                        createUser(User(null, firstName, password, email,
+                            isClient = true,
+                            status = true
+                        ))
+                    } else {
+                        val toast = Toast.makeText(activity?.applicationContext, "Пользователь с таким email уже существует!", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.TOP, 0, 0)
+                        toast.show()
+                    }
                 }
                 else {
-                    val toast = Toast.makeText(activity?.applicationContext, "Пользователь с таким email уже существует!", Toast.LENGTH_SHORT)
+                    val toast = Toast.makeText(activity?.applicationContext, "Пароли не совпадают!", Toast.LENGTH_SHORT)
                     toast.setGravity(Gravity.TOP, 0, 0)
                     toast.show()
+
                 }
+
             }
         }
     }

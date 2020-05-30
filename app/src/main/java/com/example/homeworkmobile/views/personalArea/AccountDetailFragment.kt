@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
+import kotlin.math.round
 
 class AccountDetailFragment : Fragment(), CoroutineScope {
 
@@ -40,7 +41,7 @@ class AccountDetailFragment : Fragment(), CoroutineScope {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        accountBalanceDetail.text = account?.accountBalance.toString()
+        accountBalanceDetail.text = ((round(account?.accountBalance!! * 100) / 100).toString())
         accountNumberDetail.text = account?.accountNumber
         dateCreatedDetail.text = account?.dateCreated
 
