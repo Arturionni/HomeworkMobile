@@ -13,8 +13,16 @@ class AccountModel @Inject constructor(
     suspend fun getAccountsFromDb(userId: Int): LiveData<List<Account?>> {
         return withContext(Dispatchers.IO) { accountsDao.getAccount(userId) }
     }
+    suspend fun closeAccount(Id: Int) {
+        return withContext(Dispatchers.IO) { accountsDao.closeAccount(Id) }
+    }
+    suspend fun replenishAccount(value: Double, account: Account) {
+        val balance = account.accountBalance
+        val total = value + balance!!
+        return withContext(Dispatchers.IO) { accountsDao.replenishAccount(total, account.id!!) }
+    }
     suspend fun addAccountToDB(userId: Int) {
-        var account = Account()
+        val account = Account()
         account.id = null
         account.accountBalance = 0.0
         account.accountNumber = ((0..1000000000).random() + 4000000000).toString()

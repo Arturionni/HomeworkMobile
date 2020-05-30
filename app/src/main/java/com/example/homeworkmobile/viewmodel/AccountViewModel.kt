@@ -15,6 +15,12 @@ class AccountViewModel @Inject constructor(private val accountModel: AccountMode
     suspend fun addAccountToDB(userId: Int) {
         return accountModel.addAccountToDB(userId)
     }
+    suspend fun closeAccount(Id: Int) {
+        return accountModel.closeAccount(Id)
+    }
+    suspend fun replenishAccount(value: Double, account: Account) {
+        return accountModel.replenishAccount(value, account)
+    }
     suspend fun accountExist(accountNumber: String): Boolean {
         return accountModel.accountExist(accountNumber)
     }

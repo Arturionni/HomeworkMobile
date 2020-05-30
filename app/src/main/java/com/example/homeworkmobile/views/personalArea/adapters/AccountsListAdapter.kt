@@ -1,20 +1,23 @@
 package com.example.homeworkmobile.views.personalArea.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeworkmobile.R
 import com.example.homeworkmobile.model.data.Account
 
 class AccountsListAdapter(
-    listArray: List<Account>?
+    listArray: List<Account>?,
+    fragment: Fragment
 ) : RecyclerView.Adapter<AccountsListAdapter.AccountViewHolder>() {
 
+    var mAdapterCallback: AdapterCallback? = null
     var list = ArrayList<Account>()
 
     init {
+        this.mAdapterCallback = fragment as AdapterCallback
         this.list = listArray as ArrayList<Account>
     }
 
@@ -49,6 +52,9 @@ class AccountsListAdapter(
     }
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         val account: Account = list[position]
+        holder.itemView.setOnClickListener {
+            mAdapterCallback?.onCardClick(account)
+        }
         holder.bind(account)
     }
     override fun getItemCount() = list.size
