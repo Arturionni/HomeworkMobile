@@ -87,14 +87,6 @@ class MainTabFragment : Fragment(), CoroutineScope,
             adapter = viewAdapter
         }!!
     }
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MainTabFragment()
-                .apply {
-            }
-    }
-
 
     override fun onCardClick(account: Account) {
         val newFragment: Fragment =

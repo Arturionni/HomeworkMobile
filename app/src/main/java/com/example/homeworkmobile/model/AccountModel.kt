@@ -11,15 +11,23 @@ class AccountModel @Inject constructor(
     private val accountsDao: AccountsDao)
 {
     suspend fun getAccountsFromDb(userId: Int): LiveData<List<Account?>> {
-        return withContext(Dispatchers.IO) { accountsDao.getAccount(userId) }
+        return withContext(Dispatchers.IO) { accountsDao.getAccounts(userId) }
+    }
+    suspend fun getAccount(accountNumber: String): Account? {
+        return withContext(Dispatchers.IO) { accountsDao.getAccount(accountNumber) }
     }
     suspend fun closeAccount(Id: Int) {
         return withContext(Dispatchers.IO) { accountsDao.closeAccount(Id) }
     }
     suspend fun replenishAccount(value: Double, account: Account) {
         val balance = account.accountBalance
-        val total = value + balance!!
-        return withContext(Dispatchers.IO) { accountsDao.replenishAccount(total, account.id!!) }
+        val total = balance!!.plus(value)
+        return withContext(Dispatchers.IO) { accountsDao.setBalanceAccount(total, account.id!!) }
+    }
+    suspend fun transferAccount(value: Double, account: Account) {
+        val balance = account.accountBalance
+        val currentBalance = balance!!.minus(value)
+        return withContext(Dispatchers.IO) { accountsDao.setBalanceAccount(currentBalance, account.id!!) }
     }
     suspend fun addAccountToDB(userId: Int) {
         val account = Account()

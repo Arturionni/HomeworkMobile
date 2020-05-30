@@ -1,5 +1,6 @@
 package com.example.homeworkmobile.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.homeworkmobile.model.AccountModel
@@ -20,6 +21,12 @@ class AccountViewModel @Inject constructor(private val accountModel: AccountMode
     }
     suspend fun replenishAccount(value: Double, account: Account) {
         return accountModel.replenishAccount(value, account)
+    }
+    suspend fun getAccount(accountNumber: String): Account? {
+        return accountModel.getAccount(accountNumber)
+    }
+    suspend fun transferAccount(value: Double, account: Account) {
+        return accountModel.transferAccount(value, account)
     }
     suspend fun accountExist(accountNumber: String): Boolean {
         return accountModel.accountExist(accountNumber)

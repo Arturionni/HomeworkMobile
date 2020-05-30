@@ -63,5 +63,27 @@ class AccountDetailFragment : Fragment(), CoroutineScope {
                 }
                 .show()
         }
+        replenishAccountButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("account", account)
+            val newFragment: Fragment =
+                ReplenishFragment()
+            val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+            transaction.replace(R.id.containerMain, newFragment);
+            newFragment.arguments = bundle
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+        transferAccountButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("account", account)
+            val newFragment: Fragment =
+                TransferFragment()
+            val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+            newFragment.arguments = bundle
+            transaction.replace(R.id.containerMain, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.homeworkmobile.views.personalArea.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homeworkmobile.R
 import com.example.homeworkmobile.model.data.Account
+import kotlin.math.round
 
 class AccountsListAdapter(
     listArray: List<Account>?,
@@ -31,7 +33,7 @@ class AccountsListAdapter(
         }
         fun bind(account: Account) {
             number?.text = account.accountNumber
-            balance?.text = account.accountBalance.toString()
+            balance?.text = ((round(account.accountBalance!! * 100) / 100).toString())
         }
     }
 
